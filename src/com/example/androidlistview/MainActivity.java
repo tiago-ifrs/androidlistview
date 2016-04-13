@@ -2,15 +2,14 @@ package com.example.androidlistview;
 
 import android.support.v7.app.ActionBarActivity;
 import android.annotation.TargetApi;
-import android.app.ListActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+@SuppressWarnings("deprecation")
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends ActionBarActivity {
 
