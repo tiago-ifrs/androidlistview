@@ -4,10 +4,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 @SuppressWarnings("deprecation")
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -18,11 +23,32 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		ListView lista = (ListView) this.findViewById(R.id.Lista);
-		
-		String[] meses = {"janeiro", "fevereiro", "março", "abril", "maio", "junho", "agosto", "setembro", "outubro", "novembro", "dezembro"};
-		ArrayAdapter<String> aa = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
+
+		String[] meses = { "janeiro", "fevereiro", "março", "abril", "maio",
+				"junho", "agosto", "setembro", "outubro", "novembro",
+				"dezembro" };
+		ArrayAdapter<String> aa = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1);
 		aa.addAll(meses);
+		lista.setChoiceMode(1);
 		lista.setAdapter(aa);
+		// Create a message handling object as an anonymous class.
+		OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View v,
+					int position, long id) {
+				// Do something in response to the click
+				String mesSelecionado;
+				mesSelecionado = parent.getAdapter().getItem(position)
+						.toString();
+				Log.v("listviu", mesSelecionado);
+
+				Toast toast = Toast.makeText(parent.getContext(), "Mês de "
+						+ mesSelecionado, Toast.LENGTH_SHORT);
+				toast.show();
+			}
+		};
+		lista.setOnItemClickListener(mMessageClickedHandler);
+
 	}
 
 	@Override
